@@ -16,7 +16,7 @@
     <!-- Introduction Section -->
     <section id="intro">
         <p>
-            Hello! My name is SUmit khanal, and I am a passionate web developer. This website is a collection of my work and projects, where you can find a range of skills and creative designs I have worked on. I specialize in front-end development, but I also enjoy exploring back-end technologies. Feel free to explore my site and check out some of the exciting projects I've worked on. I am always learning and expanding my knowledge to stay up-to-date with the latest technologies in the field.
+            Hello! My name is Sumit khanal, and I am a passionate web developer. This website is a collection of my work and projects, where you can find a range of skills and creative designs I have worked on. I specialize in front-end development, but I also enjoy exploring back-end technologies. Feel free to explore my site and check out some of the exciting projects I've worked on. I am always learning and expanding my knowledge to stay up-to-date with the latest technologies in the field.
         </p>
 
         <!-- Image Section -->
