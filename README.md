@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
         td { border: 2px solid #333; width: 80px; height: 80px; }
         button { width: 100%; height: 100%; font-size: 32px; background: white; border: none; cursor: pointer; }
         .reset-btn { margin-top: 20px; font-size: 18px; padding: 10px; background: #ff4d4d; color: white; border: none; cursor: pointer; }
+        footer { margin-top: 20px; font-size: 16px; color: #555; }
     </style>
 </head>
 <body>
@@ -21,6 +22,9 @@
         <tr><td><button></button></td><td><button></button></td><td><button></button></td></tr>
     </table>
     <button class="reset-btn" onclick="resetGame()">Reset</button>
+    
+    <footer>By Sumit Khanal</footer>
+
     <script>
         let xTurn = true;
         document.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => mark(btn)));
