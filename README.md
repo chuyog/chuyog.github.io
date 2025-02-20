@@ -1,59 +1,123 @@
 
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Toe</title>
+    <title>Memory Match</title>
     <style>
-        body { text-align: center; font-family: Arial, sans-serif; background: #f9f9f9; }
-        table { margin: auto; border-collapse: collapse; }
-        td { border: 2px solid #333; width: 80px; height: 80px; }
-        button { width: 100%; height: 100%; font-size: 32px; background: white; border: none; cursor: pointer; }
-        .reset-btn { margin-top: 20px; font-size: 18px; padding: 10px; background: #ff4d4d; color: white; border: none; cursor: pointer; }
-        footer { margin-top: 20px; font-size: 16px; color: #555; }
+        .tile {
+            font-size: xx-large;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            background-color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+        td {
+            width: 55px;
+            height: 55px;
+        }
+        #gameBoard {
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+        }
+        .game-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Tic-Tac-Toe</h1>
-    <h2 id="winner"></h2>
-    <table>
-        <tr><td><button></button></td><td><button></button></td><td><button></button></td></tr>
-        <tr><td><button></button></td><td><button></button></td><td><button></button></td></tr>
-        <tr><td><button></button></td><td><button></button></td><td><button></button></td></tr>
-    </table>
-    <button class="reset-btn" onclick="resetGame()">Reset</button>
+    <h1>Welcome to Memory Match</h1>
+    <div class="game-info">
+        <p><button onclick="resetBoard()">Reset Game</button></p>
+        <p>Matches: <span id="matchCount">0</span></p>
+        <p><span id="gameStatus"></span></p>
+    </div>
+    <div id="gameBoard"></div>
     
-    <footer>By Sumit Khanal</footer>
-
     <script>
-        let xTurn = true;
-        document.querySelectorAll("button").forEach(btn => btn.addEventListener("click", () => mark(btn)));
-        
-        function mark(btn) {
-            if (!btn.innerText) {
-                btn.innerText = xTurn ? "X" : "O";
-                btn.style.color = xTurn ? "blue" : "green";
-                xTurn = !xTurn;
-                checkWin();
+        let map = [];
+        let tile1 = null, tile2 = null;
+        let matchCount = 0;
+        let totalMatches = 0;
+
+        const loadMap = (rows = 6, cols = 6) => {
+            let maxVal = (rows * cols) / 2;
+            totalMatches = maxVal;  // Total number of matches
+            let numbers = [];
+            for (let i = 1; i <= maxVal; i++) {
+                numbers.push(i, i);
             }
+            numbers = shuffle(numbers);
+            
+            map = [];
+            for (let i = 0; i < rows; i++) {
+                map.push(numbers.slice(i * cols, (i + 1) * cols));
+            }
+        };
+
+        const shuffle = (array) => {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        };
+
+        const makeBoard = (rows = 4, cols = 4) => {
+            let output = '<table>';
+            for (let row = 0; row < rows; row++) {
+                output += '<tr>';
+                for (let col = 0; col < cols; col++) {
+                    output += `<td><button class="tile" id="${row}_${col}" onclick="process(${row}, ${col})"></button></td>`;
+                }
+                output += '</tr>';
+            }
+            document.getElementById('gameBoard').innerHTML = output + '</table>';
+        };
+
+        function resetBoard() {
+            loadMap();
+            makeBoard();
+            matchCount = 0;
+            document.getElementById('matchCount').textContent = matchCount;
+            document.getElementById('gameStatus').textContent = '';
         }
-        
-        function resetGame() {
-            document.querySelectorAll("button").forEach(btn => btn.innerText = "");
-            document.getElementById("winner").innerText = "";
-            xTurn = true;
-        }
-        
-        function checkWin() {
-            let buttons = [...document.querySelectorAll("button")].map(btn => btn.innerText);
-            let wins = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
-            for (let [a, b, c] of wins) {
-                if (buttons[a] && buttons[a] === buttons[b] && buttons[a] === buttons[c]) {
-                    document.getElementById("winner").innerText = `${buttons[a]} Wins!`;
-                    return;
+
+        function process(row, col) {
+            let clicked_tile = document.getElementById(`${row}_${col}`);
+            if (!clicked_tile.innerHTML) {
+                if (!tile1) {
+                    tile1 = clicked_tile;
+                    clicked_tile.innerHTML = map[row][col];
+                } else if (!tile2) {
+                    tile2 = clicked_tile;
+                    clicked_tile.innerHTML = map[row][col];
+                    setTimeout(checkMatch, 1000);
                 }
             }
         }
+
+        const checkMatch = () => {
+            if (tile1.innerHTML === tile2.innerHTML) {
+                tile1.hidden = true;
+                tile2.hidden = true;
+                matchCount++;
+                document.getElementById('matchCount').textContent = matchCount;
+                if (matchCount === totalMatches) {
+                    document.getElementById('gameStatus').textContent = 'You Win! All pairs matched!';
+                }
+            } else {
+                tile1.innerHTML = '';
+                tile2.innerHTML = '';
+            }
+            tile1 = tile2 = null;
+        };
+
+        resetBoard();
     </script>
 </body>
 </html>
