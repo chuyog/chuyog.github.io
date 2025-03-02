@@ -1,123 +1,140 @@
-
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Match</title>
+    <title>Minimalist  Mastermind</title>
     <style>
-        .tile {
-            font-size: xx-large;
-            width: 100px;
-            height: 100px;
-            line-height: 100px;
-            background-color: white;
-            text-align: center;
-            cursor: pointer;
+        body {
+            font-family: Times New Roman, sans-serif;
+            background-color: #87CEEB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
-        td {
-            width: 55px;
-            height: 55px;
+        #gameArea {
+            background-color: gray;
+            padding: 300px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        #gameBoard {
-            margin: 20px auto;
-            display: block;
+        input {
+            width: 30px;
             text-align: center;
         }
-        .game-info {
-            text-align: center;
-            margin-bottom: 20px;
+        button {
+            margin-top: 30px;
+        }
+        #feedback {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Memory Match</h1>
-    <div class="game-info">
-        <p><button onclick="resetBoard()">Reset Game</button></p>
-        <p>Matches: <span id="matchCount">0</span></p>
-        <p><span id="gameStatus"></span></p>
+    <h1>Minimalist Mastermind</h1>
+    <div id="gameArea">
+        <p>Enter 4 digits (1-6):</p>
+        <input type="text" maxlength="1" id="slot1">
+        <input type="text" maxlength="1" id="slot2">
+        <input type="text" maxlength="1" id="slot3">
+        <input type="text" maxlength="1" id="slot4">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <div id="feedback"></div>
     </div>
-    <div id="gameBoard"></div>
-    
+
     <script>
-        let map = [];
-        let tile1 = null, tile2 = null;
-        let matchCount = 0;
-        let totalMatches = 0;
-
-        const loadMap = (rows = 6, cols = 6) => {
-            let maxVal = (rows * cols) / 2;
-            totalMatches = maxVal;  // Total number of matches
-            let numbers = [];
-            for (let i = 1; i <= maxVal; i++) {
-                numbers.push(i, i);
-            }
-            numbers = shuffle(numbers);
-            
-            map = [];
-            for (let i = 0; i < rows; i++) {
-                map.push(numbers.slice(i * cols, (i + 1) * cols));
-            }
-        };
-
-        const shuffle = (array) => {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        };
-
-        const makeBoard = (rows = 4, cols = 4) => {
-            let output = '<table>';
-            for (let row = 0; row < rows; row++) {
-                output += '<tr>';
-                for (let col = 0; col < cols; col++) {
-                    output += `<td><button class="tile" id="${row}_${col}" onclick="process(${row}, ${col})"></button></td>`;
-                }
-                output += '</tr>';
-            }
-            document.getElementById('gameBoard').innerHTML = output + '</table>';
-        };
-
-        function resetBoard() {
-            loadMap();
-            makeBoard();
-            matchCount = 0;
-            document.getElementById('matchCount').textContent = matchCount;
-            document.getElementById('gameStatus').textContent = '';
-        }
-
-        function process(row, col) {
-            let clicked_tile = document.getElementById(`${row}_${col}`);
-            if (!clicked_tile.innerHTML) {
-                if (!tile1) {
-                    tile1 = clicked_tile;
-                    clicked_tile.innerHTML = map[row][col];
-                } else if (!tile2) {
-                    tile2 = clicked_tile;
-                    clicked_tile.innerHTML = map[row][col];
-                    setTimeout(checkMatch, 1000);
-                }
+        class RuleError extends Error {
+            constructor(message) {
+                super(message);
+                this.name = "Rule Error";
             }
         }
 
-        const checkMatch = () => {
-            if (tile1.innerHTML === tile2.innerHTML) {
-                tile1.hidden = true;
-                tile2.hidden = true;
-                matchCount++;
-                document.getElementById('matchCount').textContent = matchCount;
-                if (matchCount === totalMatches) {
-                    document.getElementById('gameStatus').textContent = 'You Win! All pairs matched!';
-                }
-            } else {
-                tile1.innerHTML = '';
-                tile2.innerHTML = '';
-            }
-            tile1 = tile2 = null;
-        };
+        const secretCode = generateSecretCode();
 
-        resetBoard();
+        function generateSecretCode() {
+            const code = [];
+            for (let i = 0; i < 4; i++) {
+                code.push(Math.floor(Math.random() * 6) + 1);
+            }
+            console.log("Secret Code (for testing):", code);
+            return code;
+        }
+
+        function checkInput(value) {
+            try {
+                const slot = parseInt(value, 10);
+                if (isNaN(slot)) {
+                    throw new RuleError("Slots must contain numbers only.");
+                }
+                if (slot < 1 || slot > 6) {
+                    throw new RuleError("Only those numbers which is inbetween 1 and 6 are accepted.");
+                }
+                return true;
+            } catch (error) {
+                alert(error.message);
+                return false;
+            }
+        }
+
+        function checkGuess() {
+            const slots = [
+                document.getElementById("slot1").value,
+                document.getElementById("slot2").value,
+                document.getElementById("slot3").value,
+                document.getElementById("slot4").value
+            ];
+
+            for (const slot of slots) {
+                if (!checkInput(slot)) {
+                    document.getElementById("feedback").innerText = "Invalid input detected.";
+                    return;
+                }
+            }
+
+            const guess = slots.map(Number);
+            const feedback = getFeedback(guess);
+            document.getElementById("feedback").innerText = feedback;
+
+            if (feedback === "4 black - It is correct!") {
+                alert("Congratulations! You have made it!");
+                resetGame();
+            }
+        }
+
+        function getFeedback(guess) {
+            let black = 0;
+            let white = 0;
+
+            const codeCopy = [...secretCode];
+            const guessCopy = [...guess];
+
+            // Check for black pegs (correct position and number)
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i] === codeCopy[i]) {
+                    black++;
+                    guessCopy[i] = codeCopy[i] = null; // Clear matched positions
+                }
+            }
+
+            // Check for white pegs (correct number, wrong position)
+            for (let i = 0; i < 4; i++) {
+                if (guessCopy[i] !== null && codeCopy.includes(guessCopy[i])) {
+                    white++;
+                    codeCopy[codeCopy.indexOf(guessCopy[i])] = null; // Clear matched number
+                }
+            }
+
+            return `${black} black, ${white} white`;
+        }
+
+        function resetGame() {
+            document.getElementById("slot1").value = "";
+            document.getElementById("slot2").value = "";
+            document.getElementById("slot3").value = "";
+            document.getElementById("slot4").value = "";
+            document.getElementById("feedback").innerText = "";
+        }
     </script>
 </body>
 </html>
