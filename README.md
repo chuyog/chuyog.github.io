@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Minimalist  Mastermind</title>
+    <title>Minimalist Mastermind</title>
     <style>
         body {
             font-family: Times New Roman, sans-serif;
@@ -14,16 +15,17 @@
         }
         #gameArea {
             background-color: gray;
-            padding: 300px;
+            padding: 20px;
             border: 1px solid #ccc;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
         input {
             width: 30px;
             text-align: center;
         }
         button {
-            margin-top: 30px;
+            margin-top: 10px;
         }
         #feedback {
             margin-top: 20px;
@@ -38,6 +40,7 @@
         <input type="text" maxlength="1" id="slot2">
         <input type="text" maxlength="1" id="slot3">
         <input type="text" maxlength="1" id="slot4">
+        <br>
         <button onclick="checkGuess()">Submit Guess</button>
         <div id="feedback"></div>
     </div>
@@ -50,15 +53,10 @@
             }
         }
 
-        const secretCode = generateSecretCode();
+        let secretCode = generateSecretCode();
 
         function generateSecretCode() {
-            const code = [];
-            for (let i = 0; i < 4; i++) {
-                code.push(Math.floor(Math.random() * 6) + 1);
-            }
-            console.log("Secret Code (for testing):", code);
-            return code;
+            return Array.from({ length: 4 }, () => Math.floor(Math.random() * 6) + 1);
         }
 
         function checkInput(value) {
@@ -68,7 +66,7 @@
                     throw new RuleError("Slots must contain numbers only.");
                 }
                 if (slot < 1 || slot > 6) {
-                    throw new RuleError("Only those numbers which is inbetween 1 and 6 are accepted.");
+                    throw new RuleError("Only numbers between 1 and 6 are accepted.");
                 }
                 return true;
             } catch (error) {
@@ -105,23 +103,20 @@
         function getFeedback(guess) {
             let black = 0;
             let white = 0;
+            let codeCopy = [...secretCode];
+            let guessCopy = [...guess];
 
-            const codeCopy = [...secretCode];
-            const guessCopy = [...guess];
-
-            // Check for black pegs (correct position and number)
             for (let i = 0; i < 4; i++) {
                 if (guessCopy[i] === codeCopy[i]) {
                     black++;
-                    guessCopy[i] = codeCopy[i] = null; // Clear matched positions
+                    guessCopy[i] = codeCopy[i] = null;
                 }
             }
 
-            // Check for white pegs (correct number, wrong position)
             for (let i = 0; i < 4; i++) {
                 if (guessCopy[i] !== null && codeCopy.includes(guessCopy[i])) {
                     white++;
-                    codeCopy[codeCopy.indexOf(guessCopy[i])] = null; // Clear matched number
+                    codeCopy[codeCopy.indexOf(guessCopy[i])] = null;
                 }
             }
 
@@ -134,6 +129,7 @@
             document.getElementById("slot3").value = "";
             document.getElementById("slot4").value = "";
             document.getElementById("feedback").innerText = "";
+            secretCode = generateSecretCode();
         }
     </script>
 </body>
