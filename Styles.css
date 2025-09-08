@@ -1,0 +1,25 @@
+/* Base styles */
+body {
+  background-color: #f8f8f8;
+  color: #222;
+  font-size: 18px;
+}
+
+h1, h2 {
+  color: #555;
+}
+
+/* Themes */
+body.default { background-color: #f8f8f8; color: #222; }
+body.dark { background-color: #111; color: #eee; }
+body.light { background-color: #fff; color: #000; }
+
+/* Font sizes */
+body.small { font-size: 14px; }
+body.medium { font-size: 18px; }
+body.large { font-size: 22px; }
+
+/* Accents */
+body.warm h1, body.warm h2 { color: #b7410e; }
+body.cool h1, body.cool h2 { color: #1e90ff; }
+body.neutral h1, body.neutral h2 { color: #555; }
