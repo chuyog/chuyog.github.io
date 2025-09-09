@@ -3,23 +3,51 @@ body {
   background-color: #f8f8f8;
   color: #222;
   font-size: 18px;
+  --accent: #555; /* default accent */
 }
 
 h1, h2 {
-  color: #555;
+  color: var(--accent);
 }
 
 /* Themes */
-body.default { background-color: #f8f8f8; color: #222; }
-body.dark { background-color: #111; color: #eee; }
-body.light { background-color: #fff; color: #000; }
+body.default {
+  background-color: #f8f8f8;
+  color: #222;
+}
+body.dark {
+  background-color: #111;
+  color: #eee;
+}
+body.light {
+  background-color: #fff;
+  color: #000;
+}
 
 /* Font sizes */
 body.small { font-size: 14px; }
 body.medium { font-size: 18px; }
 body.large { font-size: 22px; }
 
-/* Accents */
-body.warm h1, body.warm h2 { color: #b7410e; }
-body.cool h1, body.cool h2 { color: #1e90ff; }
-body.neutral h1, body.neutral h2 { color: #555; }
+/* Accent color definitions */
+body.warm { --accent: #b7410e; }   /* burnt orange */
+body.cool { --accent: #1e90ff; }   /* dodger blue */
+body.neutral { --accent: #555; }   /* gray */
+
+/* Apply accent everywhere */
+h1, h2 { color: var(--accent); }
+a { color: var(--accent); }
+
+button {
+  margin: 5px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--accent);
+  color: white;
+  transition: background 0.2s ease;
+}
+button:hover {
+  background: #333; /* darker hover effect */
+}
