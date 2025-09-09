@@ -31,5 +31,4 @@ function changeSettings(newTheme, newFont, newAccent) {
   body.className = theme + " " + font + " " + accent;
 
   // Update text
-  current.textContent = `Current: ${theme} Theme | ${font} Font | ${accent} Accent`;
-}
+  current.textContent = `Current: ${theme} The
