@@ -28,7 +28,16 @@ function changeSettings(newTheme, newFont, newAccent) {
   if (newAccent) accent = newAccent;
 
   // Reset body classes
-  body.className = theme + " " + font + " " + accent;
+  body.className = `${theme} ${font} ${accent}`;
 
   // Update text
-  current.textContent = `Current: ${theme} The
+  current.textContent = `Current: ${capitalize(theme)} Theme | ${capitalize(font)} Font | ${capitalize(accent)} Accent`;
+}
+
+// Capitalize helper
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+// Initialize defaults on load
+changeSettings(theme, font, accent);
