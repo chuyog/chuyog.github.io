@@ -1,53 +1,36 @@
-/* Base styles */
 body {
-  background-color: #f8f8f8;
-  color: #222;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
   font-size: 18px;
-  --accent: #555; /* default accent */
+  color: #222;
+  --accent: #555;
 }
 
 h1, h2 {
   color: var(--accent);
 }
 
-/* Themes */
-body.default {
-  background-color: #f8f8f8;
-  color: #222;
-}
-body.dark {
-  background-color: #111;
-  color: #eee;
-}
-body.light {
-  background-color: #fff;
-  color: #000;
-}
+// themes
+body.default { background-color: #f0f0f0; color: #222; }
+body.dark { background-color: #111; color: #eee; }
+body.light { background-color: #fff; color: #000; }
 
-/* Font sizes */
+// font sizes 
 body.small { font-size: 14px; }
 body.medium { font-size: 18px; }
 body.large { font-size: 22px; }
 
-/* Accent color definitions */
-body.warm { --accent: #b7410e; }   /* burnt orange */
-body.cool { --accent: #1e90ff; }   /* dodger blue */
-body.neutral { --accent: #555; }   /* gray */
-
-/* Apply accent everywhere */
-h1, h2 { color: var(--accent); }
-a { color: var(--accent); }
+// accents 
+body.warm { --accent: #b7410e; }
+body.cool { --accent: #1e90ff; }
+body.neutral { --accent: #555; }
 
 button {
-  margin: 5px;
-  padding: 8px 14px;
+  margin: 4px;
+  padding: 6px 10px;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  border-radius: 4px;
   background: var(--accent);
   color: white;
-  transition: background 0.2s ease;
-}
-button:hover {
-  background: #333; /* darker hover effect */
+  cursor: pointer;
 }
