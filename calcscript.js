@@ -1,34 +1,82 @@
-// Variables are like little boxes where you can store data.
-// Rules for naming them:
-// 1. Must start with a letter, $ , or _
-// 2. After the first letter, you can use letters, numbers, $ or _
-// 3. Can't use reserved words like "var", "if", "while", etc.
-// 4. Case matters: "apple" and "Apple" are different
-// 5. Each variable should have a unique name in the same place
-// 6. Use names that make sense! (camelCase is popular in JS)
+// --- Simple Counter ---
+let count = 0;
 
-numberOfStudents = 18; 
-console.log(numberOfStudents);
-
-var numberOfBooks = 3; 
-console.log(numberOfBooks);
-
-let numberOfAs = 16; 
-console.log(numberOfAs);
-
-{
-  let y = 15;            
-  const PI = 3.14159265; 
-
-
-  console.log("Inside the block: y =", y, "PI =", PI);
+function countUp() {
+  count++;
+  document.getElementById("countResult").textContent = count;
 }
 
- 
-// Pythagoras theorem: a^2 + b^2 = c^2
-let a = 3;
-let b = 4;
-let c = Math.sqrt(a**2 + b**2); // ** means "raised to the power of"
-console.log(`The hypotenuse c is ${c}`);
+function countDown() {
+  count--;
+  document.getElementById("countResult").textContent = count;
+}
 
-let studentCount = 25; 
+// --- Compound Assignment ---
+let countBy = 0;
+
+function countUpBy() {
+  let value = parseInt(document.getElementById("countByValue").value);
+  countBy += value;
+  document.getElementById("countByResult").textContent = countBy;
+}
+
+function countDownBy() {
+  let value = parseInt(document.getElementById("countByValue").value);
+  countBy -= value;
+  document.getElementById("countByResult").textContent = countBy;
+}
+
+// --- Arithmetic Operators ---
+function getOperands() {
+  let op1 = parseFloat(document.getElementById("op1").value);
+  let op2 = parseFloat(document.getElementById("op2").value);
+  return [op1, op2];
+}
+
+function add() {
+  let [op1, op2] = getOperands();
+  document.getElementById("arithmeticResult").textContent = op1 + op2;
+}
+
+function subtract() {
+  let [op1, op2] = getOperands();
+  document.getElementById("arithmeticResult").textContent = op1 - op2;
+}
+
+function multiply() {
+  let [op1, op2] = getOperands();
+  document.getElementById("arithmeticResult").textContent = op1 * op2;
+}
+
+function divide() {
+  let [op1, op2] = getOperands();
+  if (op2 === 0) {
+    document.getElementById("arithmeticResult").textContent = "Cannot divide by zero";
+  } else {
+    document.getElementById("arithmeticResult").textContent = op1 / op2;
+  }
+}
+
+function modulo() {
+  let [op1, op2] = getOperands();
+  document.getElementById("arithmeticResult").textContent = op1 % op2;
+}
+
+// --- Math Object Functions ---
+function pi() {
+  document.getElementById("mathResult").textContent = Math.PI.toFixed(5);
+}
+
+function sine() {
+  let value = parseFloat(document.getElementById("mathOp").value);
+  document.getElementById("mathResult").textContent = Math.sin(value).toFixed(5);
+}
+
+function squareRoot() {
+  let value = parseFloat(document.getElementById("mathOp").value);
+  document.getElementById("mathResult").textContent = Math.sqrt(value).toFixed(5);
+}
+
+function randomNum() {
+  document.getElementById("mathResult").textContent = Math.random().toFixed(5);
+}
