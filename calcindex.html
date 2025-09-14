@@ -1,51 +1,120 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Arithmetic and Math Operators Calculator</title>
-</head>
-<body>
-  <h1>Arithmetic and Math Operators Calculator</h1>
-  <hr>
+// Simple Increment/Decrement
 
-  <!-- Increment / Decrement -->
-  <h2>Simple Increment/Decrement</h2>
-  <p>Simple counter: <span id="countResult">0</span></p>
-  <button onclick="countUp()">Up</button>
-  <button onclick="countDown()">Down</button>
-  <hr>
+let count = 0;
+const countResult = document.getElementById("countResult");
+countResult.textContent = count;
 
-  <!-- Compound Assignment -->
-  <h2>Compound Assignment</h2>
-  <p>
-    <label>Count by </label>
-    <input type="text" value="2" size="3" id="countByValue">
-    <span> → <span id="countByResult">0</span></span>
-  </p>
-  <button onclick="countUpBy()">Up</button>
-  <button onclick="countDownBy()">Down</button>
-  <hr>
+function countUp() {
+  count++;
+  countResult.textContent = count;
+}
 
-  <!-- Arithmetic Operators -->
-  <h2>Arithmetic Operators</h2>
-  <p>Result: <span id="arithmeticResult"></span></p>
-  <p><label for="op1">Operand 1:</label> <input type="text" id="op1"></p>
-  <p><label for="op2">Operand 2:</label> <input type="text" id="op2"></p>
-  <button onclick="add()">+</button>
-  <button onclick="subtract()">-</button>
-  <button onclick="multiply()">*</button>
-  <button onclick="divide()">/</button>
-  <button onclick="modulo()">%</button>
-  <hr>
+function countDown() {
+  count--;
+  countResult.textContent = count;
+}
 
-  <!-- Math Object -->
-  <h2>Math Object Functions</h2>
-  <p>Result: <span id="mathResult"></span></p>
-  <p><label for="mathOp">Operand:</label> <input type="text" id="mathOp"></p>
-  <button onclick="pi()">Pi</button>
-  <button onclick="sine()">Sine</button>
-  <button onclick="squareRoot()">Square Root</button>
-  <button onclick="randomNum()">Random</button>
+// Compound Assignment
+let countBy = 0;
+const countByResult = document.getElementById("countByResult");
 
-  <script src="calcscript.js"></script>
-</body>
-</html>
+function countUpBy() {
+  const step = parseFloat(document.getElementById("countByValue").value);
+  if (!isNaN(step)) {
+    countBy += step;
+    countByResult.textContent = countBy;
+  } else {
+    alert("Please enter a valid number.");
+  }
+}
+
+function countDownBy() {
+  const step = parseFloat(document.getElementById("countByValue").value);
+  if (!isNaN(step)) {
+    countBy -= step;
+    countByResult.textContent = countBy;
+  } else {
+    alert("Please enter a valid number.");
+  }
+}
+
+// Arithmetic Operators
+const arithmeticResult = document.getElementById("arithmeticResult");
+
+function getOperands() {
+  const op1 = parseFloat(document.getElementById("op1").value);
+  const op2 = parseFloat(document.getElementById("op2").value);
+
+  if (isNaN(op1) || isNaN(op2)) {
+    alert("Please enter valid numbers for both operands.");
+    return null;
+  }
+  return [op1, op2];
+}
+
+function add() {
+  const operands = getOperands();
+  if (operands) arithmeticResult.textContent = operands[0] + operands[1];
+}
+
+function subtract() {
+  const operands = getOperands();
+  if (operands) arithmeticResult.textContent = operands[0] - operands[1];
+}
+
+function multiply() {
+  const operands = getOperands();
+  if (operands) arithmeticResult.textContent = operands[0] * operands[1];
+}
+
+function divide() {
+  const operands = getOperands();
+  if (operands) {
+    if (operands[1] === 0) {
+      arithmeticResult.textContent = "Cannot divide by zero!";
+    } else {
+      arithmeticResult.textContent = operands[0] / operands[1];
+    }
+  }
+}
+
+function modulo() {
+  const operands = getOperands();
+  if (operands) arithmeticResult.textContent = operands[0] % operands[1];
+}
+
+// Math Object Functions
+const mathResult = document.getElementById("mathResult");
+
+function getMathOperand() {
+  const value = parseFloat(document.getElementById("mathOp").value);
+  if (isNaN(value)) {
+    alert("Please enter a valid number.");
+    return null;
+  }
+  return value;
+}
+
+function pi() {
+  mathResult.textContent = Math.PI;
+}
+
+function sine() {
+  const value = getMathOperand();
+  if (value !== null) mathResult.textContent = Math.sin(value);
+}
+
+function squareRoot() {
+  const value = getMathOperand();
+  if (value !== null) {
+    if (value < 0) {
+      mathResult.textContent = "Cannot take square root of negative number!";
+    } else {
+      mathResult.textContent = Math.sqrt(value);
+    }
+  }
+}
+
+function randomNum() {
+  mathResult.textContent = Math.random();
+}
