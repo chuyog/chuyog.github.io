@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arithmetic and Math Operators Calculator</title>
+</head>
+<body>
+  <h1>Arithmetic and Math Operators Calculator</h1>
+  <hr>
+
+  <!-- Increment / Decrement -->
+  <h2>Simple Increment/Decrement</h2>
+  <p>Simple counter: <span id="countResult">0</span></p>
+  <button onclick="countUp()">Up</button>
+  <button onclick="countDown()">Down</button>
+  <hr>
+
+  <!-- Compound Assignment -->
+  <h2>Compound Assignment</h2>
+  <p>
+    <label>Count by </label>
+    <input type="text" value="2" size="3" id="countByValue">
+    <span> → <span id="countByResult">0</span></span>
+  </p>
+  <button onclick="countUpBy()">Up</button>
+  <button onclick="countDownBy()">Down</button>
+  <hr>
+
+  <!-- Arithmetic Operators -->
+  <h2>Arithmetic Operators</h2>
+  <p>Result: <span id="arithmeticResult"></span></p>
+  <p><label for="op1">Operand 1:</label> <input type="text" id="op1"></p>
+  <p><label for="op2">Operand 2:</label> <input type="text" id="op2"></p>
+  <button onclick="add()">+</button>
+  <button onclick="subtract()">-</button>
+  <button onclick="multiply()">*</button>
+  <button onclick="divide()">/</button>
+  <button onclick="modulo()">%</button>
+  <hr>
+
+  <!-- Math Object -->
+  <h2>Math Object Functions</h2>
+  <p>Result: <span id="mathResult"></span></p>
+  <p><label for="mathOp">Operand:</label> <input type="text" id="mathOp"></p>
+  <button onclick="pi()">Pi</button>
+  <button onclick="sine()">Sine</button>
+  <button onclick="squareRoot()">Square Root</button>
+  <button onclick="randomNum()">Random</button>
+
+  <script src="calcscript.js"></script>
+</body>
+</html>
