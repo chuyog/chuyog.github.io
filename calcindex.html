@@ -1,148 +1,70 @@
-// ===== Simple Increment/Decrement =====
-let count = 0;
-const countResult = document.getElementById("countResult");
-countResult.textContent = count;
-
-function countUp() {
-  count++;
-  countResult.textContent = count;
-}
-
-function countDown() {
-  count--;
-  countResult.textContent = count;
-}
-
-// ===== Compound Assignment =====
-let countBy = 0;
-const countByResult = document.getElementById("countByResult");
-
-function countUpBy() {
-  const input = document.getElementById("countByValue");
-  const step = parseFloat(input.value);
-  if (!isNaN(step)) {
-    countBy += step;
-    countByResult.textContent = countBy;
-    input.value = ""; // clear input
-  } else {
-    alert("Please enter a valid number.");
-  }
-}
-
-function countDownBy() {
-  const input = document.getElementById("countByValue");
-  const step = parseFloat(input.value);
-  if (!isNaN(step)) {
-    countBy -= step;
-    countByResult.textContent = countBy;
-    input.value = ""; // clear input
-  } else {
-    alert("Please enter a valid number.");
-  }
-}
-
-// ===== Arithmetic Operators =====
-const arithmeticResult = document.getElementById("arithmeticResult");
-
-function getOperands() {
-  const op1Input = document.getElementById("op1");
-  const op2Input = document.getElementById("op2");
-  const op1 = parseFloat(op1Input.value);
-  const op2 = parseFloat(op2Input.value);
-
-  if (isNaN(op1) || isNaN(op2)) {
-    alert("Please enter valid numbers for both operands.");
-    return null;
-  }
-  return [op1, op2];
-}
-
-function add() {
-  const operands = getOperands();
-  if (operands) {
-    arithmeticResult.textContent = (operands[0] + operands[1]).toFixed(2);
-    clearArithmeticInputs();
-  }
-}
-
-function subtract() {
-  const operands = getOperands();
-  if (operands) {
-    arithmeticResult.textContent = (operands[0] - operands[1]).toFixed(2);
-    clearArithmeticInputs();
-  }
-}
-
-function multiply() {
-  const operands = getOperands();
-  if (operands) {
-    arithmeticResult.textContent = (operands[0] * operands[1]).toFixed(2);
-    clearArithmeticInputs();
-  }
-}
-
-function divide() {
-  const operands = getOperands();
-  if (operands) {
-    if (operands[1] === 0) {
-      arithmeticResult.textContent = "Cannot divide by zero!";
-    } else {
-      arithmeticResult.textContent = (operands[0] / operands[1]).toFixed(2);
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arithmetic and Math Operators Calculator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f9f9f9;
+      padding: 20px;
     }
-    clearArithmeticInputs();
-  }
-}
-
-function modulo() {
-  const operands = getOperands();
-  if (operands) {
-    arithmeticResult.textContent = (operands[0] % operands[1]).toFixed(2);
-    clearArithmeticInputs();
-  }
-}
-
-function clearArithmeticInputs() {
-  document.getElementById("op1").value = "";
-  document.getElementById("op2").value = "";
-}
-
-// ===== Math Object Functions =====
-const mathResult = document.getElementById("mathResult");
-
-function getMathOperand() {
-  const input = document.getElementById("mathOp");
-  const value = parseFloat(input.value);
-  if (isNaN(value)) {
-    alert("Please enter a valid number.");
-    return null;
-  }
-  return value;
-}
-
-function pi() {
-  mathResult.textContent = Math.PI.toFixed(4);
-}
-
-function sine() {
-  const value = getMathOperand();
-  if (value !== null) {
-    mathResult.textContent = Math.sin(value).toFixed(4);
-    document.getElementById("mathOp").value = "";
-  }
-}
-
-function squareRoot() {
-  const value = getMathOperand();
-  if (value !== null) {
-    if (value < 0) {
-      mathResult.textContent = "Cannot take square root of negative number!";
-    } else {
-      mathResult.textContent = Math.sqrt(value).toFixed(4);
+    input {
+      width: 60px;
     }
-    document.getElementById("mathOp").value = "";
-  }
-}
+    button {
+      margin: 5px;
+    }
+    hr {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
 
-function randomNum() {
-  mathResult.textContent = Math.random().toFixed(4);
-}
+  <h1>Arithmetic and Math Operators Calculator</h1>
+  <hr>
+
+  <!-- Simple Increment / Decrement -->
+  <h2>Simple Increment/Decrement</h2>
+  <p>Counter: <span id="countResult">0</span></p>
+  <button onclick="countUp()">Up</button>
+  <button onclick="countDown()">Down</button>
+  <hr>
+
+  <!-- Compound Assignment -->
+  <h2>Compound Assignment</h2>
+  <label>Count by:</label>
+  <input type="text" value="2" id="countByValue">
+  <span> → <span id="countByResult">0</span></span><br>
+  <button onclick="countUpBy()">Up</button>
+  <button onclick="countDownBy()">Down</button>
+  <hr>
+
+  <!-- Arithmetic Operators -->
+  <h2>Arithmetic Operators</h2>
+  <p>Result: <span id="arithmeticResult"></span></p>
+  <label>Operand 1:</label>
+  <input type="text" id="op1"><br>
+  <label>Operand 2:</label>
+  <input type="text" id="op2"><br>
+  <button onclick="add()">+</button>
+  <button onclick="subtract()">-</button>
+  <button onclick="multiply()">*</button>
+  <button onclick="divide()">/</button>
+  <button onclick="modulo()">%</button>
+  <hr>
+
+  <!-- Math Object Functions -->
+  <h2>Math Object Functions</h2>
+  <p>Result: <span id="mathResult"></span></p>
+  <label>Operand:</label>
+  <input type="text" id="mathOp"><br>
+  <button onclick="pi()">Pi</button>
+  <button onclick="sine()">Sine</button>
+  <button onclick="squareRoot()">Square Root</button>
+  <button onclick="randomNum()">Random</button>
+
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
