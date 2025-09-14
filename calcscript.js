@@ -1,82 +1,133 @@
-// --- Simple Counter ---
-let count = 0;
+// ===== Simple Increment/Decrement =====
+let counter = 0;
+const counterDisplay = document.getElementById("countResult");
 
-function countUp() {
-  count++;
-  document.getElementById("countResult").textContent = count;
+function increment() {
+  counter++;
+  counterDisplay.textContent = counter;
 }
 
-function countDown() {
-  count--;
-  document.getElementById("countResult").textContent = count;
+function decrement() {
+  counter--;
+  counterDisplay.textContent = counter;
 }
 
-// --- Compound Assignment ---
-let countBy = 0;
+// ===== Count By a Step =====
+let counterByStep = 0;
+const counterByDisplay = document.getElementById("countByResult");
 
-function countUpBy() {
-  let value = parseInt(document.getElementById("countByValue").value);
-  countBy += value;
-  document.getElementById("countByResult").textContent = countBy;
-}
-
-function countDownBy() {
-  let value = parseInt(document.getElementById("countByValue").value);
-  countBy -= value;
-  document.getElementById("countByResult").textContent = countBy;
-}
-
-// --- Arithmetic Operators ---
-function getOperands() {
-  let op1 = parseFloat(document.getElementById("op1").value);
-  let op2 = parseFloat(document.getElementById("op2").value);
-  return [op1, op2];
-}
-
-function add() {
-  let [op1, op2] = getOperands();
-  document.getElementById("arithmeticResult").textContent = op1 + op2;
-}
-
-function subtract() {
-  let [op1, op2] = getOperands();
-  document.getElementById("arithmeticResult").textContent = op1 - op2;
-}
-
-function multiply() {
-  let [op1, op2] = getOperands();
-  document.getElementById("arithmeticResult").textContent = op1 * op2;
-}
-
-function divide() {
-  let [op1, op2] = getOperands();
-  if (op2 === 0) {
-    document.getElementById("arithmeticResult").textContent = "Cannot divide by zero";
+function incrementByStep() {
+  const stepInput = parseFloat(document.getElementById("countByValue").value);
+  if (!isNaN(stepInput)) {
+    counterByStep += stepInput;
+    counterByDisplay.textContent = counterByStep;
+    document.getElementById("countByValue").value = "";
   } else {
-    document.getElementById("arithmeticResult").textContent = op1 / op2;
+    alert("Please enter a valid number!");
   }
 }
 
-function modulo() {
-  let [op1, op2] = getOperands();
-  document.getElementById("arithmeticResult").textContent = op1 % op2;
+function decrementByStep() {
+  const stepInput = parseFloat(document.getElementById("countByValue").value);
+  if (!isNaN(stepInput)) {
+    counterByStep -= stepInput;
+    counterByDisplay.textContent = counterByStep;
+    document.getElementById("countByValue").value = "";
+  } else {
+    alert("Please enter a valid number!");
+  }
 }
 
-// --- Math Object Functions ---
-function pi() {
-  document.getElementById("mathResult").textContent = Math.PI.toFixed(5);
+// ===== Arithmetic Operations =====
+const arithmeticDisplay = document.getElementById("arithmeticResult");
+
+function getOperands() {
+  const firstNumber = parseFloat(document.getElementById("op1").value);
+  const secondNumber = parseFloat(document.getElementById("op2").value);
+  if (isNaN(firstNumber) || isNaN(secondNumber)) {
+    alert("Please enter valid numbers for both operands.");
+    return null;
+  }
+  return [firstNumber, secondNumber];
 }
 
-function sine() {
-  let value = parseFloat(document.getElementById("mathOp").value);
-  document.getElementById("mathResult").textContent = Math.sin(value).toFixed(5);
+function addNumbers() {
+  const operands = getOperands();
+  if (operands) {
+    arithmeticDisplay.textContent = (operands[0] + operands[1]).toFixed(2);
+    clearArithmeticInputs();
+  }
 }
 
-function squareRoot() {
-  let value = parseFloat(document.getElementById("mathOp").value);
-  document.getElementById("mathResult").textContent = Math.sqrt(value).toFixed(5);
+function subtractNumbers() {
+  const operands = getOperands();
+  if (operands) {
+    arithmeticDisplay.textContent = (operands[0] - operands[1]).toFixed(2);
+    clearArithmeticInputs();
+  }
 }
 
-function randomNum() {
-  document.getElementById("mathResult").textContent = Math.random().toFixed(5);
+function multiplyNumbers() {
+  const operands = getOperands();
+  if (operands) {
+    arithmeticDisplay.textContent = (operands[0] * operands[1]).toFixed(2);
+    clearArithmeticInputs();
+  }
+}
+
+function divideNumbers() {
+  const operands = getOperands();
+  if (operands) {
+    if (operands[1] === 0) {
+      arithmeticDisplay.textContent = "Cannot divide by zero!";
+    } else {
+      arithmeticDisplay.textContent = (operands[0] / operands[1]).toFixed(2);
+    }
+    clearArithmeticInputs();
+  }
+}
+
+function clearArithmeticInputs() {
+  document.getElementById("op1").value = "";
+  document.getElementById("op2").value = "";
+}
+
+// ===== Math Functions =====
+const mathDisplay = document.getElementById("mathResult");
+
+function getMathValue() {
+  const value = parseFloat(document.getElementById("mathOp").value);
+  if (isNaN(value)) {
+    alert("Please enter a valid number!");
+    return null;
+  }
+  return value;
+}
+
+function showPi() {
+  mathDisplay.textContent = Math.PI.toFixed(4);
+}
+
+function calculateSine() {
+  const value = getMathValue();
+  if (value !== null) {
+    mathDisplay.textContent = Math.sin(value).toFixed(4);
+    document.getElementById("mathOp").value = "";
+  }
+}
+
+function calculateSquareRoot() {
+  const value = getMathValue();
+  if (value !== null) {
+    if (value < 0) {
+      mathDisplay.textContent = "Cannot take square root of negative number!";
+    } else {
+      mathDisplay.textContent = Math.sqrt(value).toFixed(4);
+    }
+    document.getElementById("mathOp").value = "";
+  }
+}
+
+function generateRandomNumber() {
+  mathDisplay.textContent = Math.random().toFixed(4);
 }
