@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Arithmetic and Math Operators Calculator</title>
+  <title>Simple Calculator</title>
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       padding: 20px;
     }
     input {
-      width: 60px;
+      width: 80px;
+      margin: 5px;
     }
     button {
       margin: 5px;
+      padding: 5px 10px;
     }
     hr {
       margin: 20px 0;
@@ -21,50 +23,49 @@
 </head>
 <body>
 
-  <h1>Arithmetic and Math Operators Calculator</h1>
+  <h1>Arithmetic & Math Operators</h1>
   <hr>
 
   <!-- Simple Increment / Decrement -->
-  <h2>Simple Increment/Decrement</h2>
+  <h2>Simple Counter</h2>
   <p>Counter: <span id="countResult">0</span></p>
   <button onclick="countUp()">Up</button>
   <button onclick="countDown()">Down</button>
   <hr>
 
-  <!-- Compound Assignment -->
-  <h2>Compound Assignment</h2>
-  <label>Count by:</label>
-  <input type="text" value="2" id="countByValue">
-  <span> → <span id="countByResult">0</span></span><br>
-  <button onclick="incrementByStep()">Up</button>
-  <button onclick="decrementByStep()">Down</button>
+  <!-- Count By Step -->
+  <h2>Counter with Step</h2>
+  <label>Step:</label>
+  <input type="text" id="stepValue" value="2">
+  <p>Result: <span id="stepResult">0</span></p>
+  <button onclick="countUpBy()">Up By Step</button>
+  <button onclick="countDownBy()">Down By Step</button>
   <hr>
 
-  <!-- Arithmetic Operators -->
+  <!-- Arithmetic Operations -->
   <h2>Arithmetic Operators</h2>
-  <p>Result: <span id="arithmeticResult"></span></p>
   <label>Operand 1:</label>
   <input type="text" id="op1"><br>
   <label>Operand 2:</label>
   <input type="text" id="op2"><br>
+  <p>Result: <span id="arithmeticResult"></span></p>
   <button onclick="add()">+</button>
   <button onclick="subtract()">-</button>
   <button onclick="multiply()">*</button>
   <button onclick="divide()">/</button>
-  <button onclick="modulo()">%</button>
   <hr>
 
-  <!-- Math Object Functions -->
-  <h2>Math Object Functions</h2>
+  <!-- Math Functions -->
+  <h2>Math Functions</h2>
+  <label>Number:</label>
+  <input type="text" id="mathInput"><br>
   <p>Result: <span id="mathResult"></span></p>
-  <label>Operand:</label>
-  <input type="text" id="mathOp"><br>
-  <button onclick="pi()">Pi</button>
-  <button onclick="sine()">Sine</button>
-  <button onclick="squareRoot()">Square Root</button>
-  <button onclick="randomNum()">Random</button>
+  <button onclick="showPi()">Pi</button>
+  <button onclick="showSine()">Sine</button>
+  <button onclick="showSquareRoot()">Square Root</button>
+  <button onclick="showRandom()">Random</button>
 
-  <!-- Link to external JavaScript file -->
+  <!-- External JS -->
   <script src="calcscript.js"></script>
 </body>
 </html>
