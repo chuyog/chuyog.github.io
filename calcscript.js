@@ -1,109 +1,59 @@
-// ===== Simple Increment / Decrement =====
-let counter = 0;
-const counterDisplay = document.getElementById("countResult");
+// ===== Shapes Section =====
 
-function countUp() {
-  counter++;
-  counterDisplay.textContent = counter;
-}
-
-function countDown() {
-  counter--;
-  counterDisplay.textContent = counter;
-}
-
-// ===== Counter with Step =====
-let stepCounter = 0;
-const stepDisplay = document.getElementById("stepResult");
-
-function countUpBy() {
-  const step = parseFloat(document.getElementById("stepValue").value);
-  if (!isNaN(step)) {
-    stepCounter += step;
-    stepDisplay.textContent = stepCounter;
+// Circle: area = πr², circumference = 2πr
+function calcCircle() {
+  const r = parseFloat(document.getElementById("circleRadius").value);
+  if (!isNaN(r) && r > 0) {
+    const area = Math.PI * r * r;
+    const circumference = 2 * Math.PI * r;
+    document.getElementById("circleResult").textContent =
+      `Area = ${area.toFixed(2)}, Circumference = ${circumference.toFixed(2)}`;
   } else {
-    alert("Please enter a valid number for step!");
+    alert("Enter a valid radius!");
   }
 }
 
-function countDownBy() {
-  const step = parseFloat(document.getElementById("stepValue").value);
-  if (!isNaN(step)) {
-    stepCounter -= step;
-    stepDisplay.textContent = stepCounter;
+// Sphere: surface area = 4πr², volume = (4/3)πr³
+function calcSphere() {
+  const r = parseFloat(document.getElementById("sphereRadius").value);
+  if (!isNaN(r) && r > 0) {
+    const area = 4 * Math.PI * r * r;
+    const volume = (4 / 3) * Math.PI * Math.pow(r, 3);
+    document.getElementById("sphereResult").textContent =
+      `Surface Area = ${area.toFixed(2)}, Volume = ${volume.toFixed(2)}`;
   } else {
-    alert("Please enter a valid number for step!");
+    alert("Enter a valid radius!");
   }
 }
 
-// ===== Arithmetic Operations =====
-const arithmeticDisplay = document.getElementById("arithmeticResult");
+// Triangle: area = 0.5 * base * height, perimeter = a + b + c
+function calcTriangle() {
+  const base = parseFloat(document.getElementById("triangleBase").value);
+  const height = parseFloat(document.getElementById("triangleHeight").value);
+  const a = parseFloat(document.getElementById("triangleA").value);
+  const b = parseFloat(document.getElementById("triangleB").value);
+  const c = parseFloat(document.getElementById("triangleC").value);
 
-function getOperands() {
-  const first = parseFloat(document.getElementById("op1").value);
-  const second = parseFloat(document.getElementById("op2").value);
-  if (isNaN(first) || isNaN(second)) {
-    alert("Please enter valid numbers for both operands!");
-    return null;
-  }
-  return [first, second];
-}
-
-function add() {
-  const nums = getOperands();
-  if (nums) arithmeticDisplay.textContent = nums[0] + nums[1];
-}
-
-function subtract() {
-  const nums = getOperands();
-  if (nums) arithmeticDisplay.textContent = nums[0] - nums[1];
-}
-
-function multiply() {
-  const nums = getOperands();
-  if (nums) arithmeticDisplay.textContent = nums[0] * nums[1];
-}
-
-function divide() {
-  const nums = getOperands();
-  if (nums) {
-    if (nums[1] === 0) {
-      arithmeticDisplay.textContent = "Cannot divide by 0!";
-    } else {
-      arithmeticDisplay.textContent = (nums[0] / nums[1]).toFixed(2);
-    }
-  }
-}
-
-// ===== Math Functions =====
-const mathDisplay = document.getElementById("mathResult");
-
-function showPi() {
-  mathDisplay.textContent = Math.PI.toFixed(4);
-}
-
-function showSine() {
-  const value = parseFloat(document.getElementById("mathInput").value);
-  if (!isNaN(value)) {
-    mathDisplay.textContent = Math.sin(value).toFixed(4);
+  if (!isNaN(base) && !isNaN(height) && !isNaN(a) && !isNaN(b) && !isNaN(c)) {
+    const area = 0.5 * base * height;
+    const perimeter = a + b + c;
+    document.getElementById("triangleResult").textContent =
+      `Area = ${area.toFixed(2)}, Perimeter = ${perimeter.toFixed(2)}`;
   } else {
-    alert("Please enter a valid number!");
+    alert("Enter valid numbers for triangle!");
   }
 }
 
-function showSquareRoot() {
-  const value = parseFloat(document.getElementById("mathInput").value);
-  if (!isNaN(value)) {
-    if (value < 0) {
-      mathDisplay.textContent = "No square root for negative!";
-    } else {
-      mathDisplay.textContent = Math.sqrt(value).toFixed(4);
-    }
+// Pyramid (square base): volume = (1/3) * base^2 * height
+function calcPyramid() {
+  const base = parseFloat(document.getElementById("pyramidBase").value);
+  const height = parseFloat(document.getElementById("pyramidHeight").value);
+
+  if (!isNaN(base) && !isNaN(height) && base > 0 && height > 0) {
+    const volume = (1 / 3) * base * base * height;
+    document.getElementById("pyramidResult").textContent =
+      `Volume = ${volume.toFixed(2)}`;
   } else {
-    alert("Please enter a valid number!");
+    alert("Enter valid base and height!");
   }
-}
-
-function showRandom() {
-  mathDisplay.textContent = Math.random().toFixed(4);
 }
