@@ -1,4 +1,4 @@
-// ===== Simple Counter =====
+// Simple Counter 
 let count = 0;
 function countUp() {
   count++;
@@ -9,7 +9,7 @@ function countDown() {
   document.getElementById("countResult").textContent = count;
 }
 
-// ===== Counter with Step =====
+// Counter with Step
 let countBy = 0;
 function countUpBy() {
   const step = parseInt(document.getElementById("stepValue").value);
@@ -22,7 +22,7 @@ function countDownBy() {
   document.getElementById("countByResult").textContent = countBy;
 }
 
-// ===== Arithmetic Operations =====
+// Arithmetic Operations 
 function add() {
   const op1 = parseFloat(document.getElementById("op1").value);
   const op2 = parseFloat(document.getElementById("op2").value);
@@ -44,9 +44,9 @@ function divide() {
   document.getElementById("arithmeticResult").textContent = op2 !== 0 ? op1 / op2 : "Error";
 }
 
-// ===== Math Functions =====
+// Math Functions 
 function showPi() {
-  document.getElementById("piResult").textContent = Math.PI.toFixed(5);
+  document.getElementById("mathResult").textContent = Math.PI.toFixed(5);
 }
 function showSine() {
   const num = parseFloat(document.getElementById("mathInput").value);
@@ -60,31 +60,23 @@ function showRandom() {
   document.getElementById("mathResult").textContent = Math.random().toFixed(5);
 }
 
-// ===== Shapes Calculations =====
-
-// Circle Area
+// Shapes 
 function circleArea() {
   const radius = parseFloat(document.getElementById("circleRadius").value);
   const area = Math.PI * radius * radius;
   document.getElementById("circleResult").textContent = area.toFixed(2);
 }
-
-// Sphere Volume
 function sphereVolume() {
   const radius = parseFloat(document.getElementById("sphereRadius").value);
   const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
   document.getElementById("sphereResult").textContent = volume.toFixed(2);
 }
-
-// Triangle Area
 function triangleArea() {
   const base = parseFloat(document.getElementById("triangleBase").value);
   const height = parseFloat(document.getElementById("triangleHeight").value);
   const area = 0.5 * base * height;
   document.getElementById("triangleResult").textContent = area.toFixed(2);
 }
-
-// Pyramid Volume (Square Base)
 function pyramidVolume() {
   const base = parseFloat(document.getElementById("pyramidBase").value);
   const height = parseFloat(document.getElementById("pyramidHeight").value);
