@@ -1,59 +1,61 @@
-// ===== Shapes Section =====
-
-// Circle: area = πr², circumference = 2πr
-function calcCircle() {
-  const r = parseFloat(document.getElementById("circleRadius").value);
-  if (!isNaN(r) && r > 0) {
-    const area = Math.PI * r * r;
-    const circumference = 2 * Math.PI * r;
-    document.getElementById("circleResult").textContent =
-      `Area = ${area.toFixed(2)}, Circumference = ${circumference.toFixed(2)}`;
-  } else {
-    alert("Enter a valid radius!");
-  }
+// Simple Counter 
+let count = 0;
+function countUp() {
+  count++;
+  document.getElementById("countResult").textContent = count;
+}
+function countDown() {
+  count--;
+  document.getElementById("countResult").textContent = count;
 }
 
-// Sphere: surface area = 4πr², volume = (4/3)πr³
-function calcSphere() {
-  const r = parseFloat(document.getElementById("sphereRadius").value);
-  if (!isNaN(r) && r > 0) {
-    const area = 4 * Math.PI * r * r;
-    const volume = (4 / 3) * Math.PI * Math.pow(r, 3);
-    document.getElementById("sphereResult").textContent =
-      `Surface Area = ${area.toFixed(2)}, Volume = ${volume.toFixed(2)}`;
-  } else {
-    alert("Enter a valid radius!");
-  }
+// counter with Step
+let countBy = 0;
+function countUpBy() {
+  const step = parseInt(document.getElementById("stepValue").value);
+  countBy += step;
+  document.getElementById("countByResult").textContent = countBy;
+}
+function countDownBy() {
+  const step = parseInt(document.getElementById("stepValue").value);
+  countBy -= step;
+  document.getElementById("countByResult").textContent = countBy;
 }
 
-// Triangle: area = 0.5 * base * height, perimeter = a + b + c
-function calcTriangle() {
+// Pi calc
+function showPi() {
+  document.getElementById("piResult").textContent = Math.PI.toFixed(5);
+}
+
+// shapes and all
+
+// Circle Area
+function circleArea() {
+  const radius = parseFloat(document.getElementById("circleRadius").value);
+  const area = Math.PI * radius * radius;
+  document.getElementById("circleResult").textContent = area.toFixed(2);
+}
+
+// Sphere Volume
+function sphereVolume() {
+  const radius = parseFloat(document.getElementById("sphereRadius").value);
+  const volume = (4 / 3) * Math.PI * Math.pow(radius, 3);
+  document.getElementById("sphereResult").textContent = volume.toFixed(2);
+}
+
+// Triangle Area
+function triangleArea() {
   const base = parseFloat(document.getElementById("triangleBase").value);
   const height = parseFloat(document.getElementById("triangleHeight").value);
-  const a = parseFloat(document.getElementById("triangleA").value);
-  const b = parseFloat(document.getElementById("triangleB").value);
-  const c = parseFloat(document.getElementById("triangleC").value);
-
-  if (!isNaN(base) && !isNaN(height) && !isNaN(a) && !isNaN(b) && !isNaN(c)) {
-    const area = 0.5 * base * height;
-    const perimeter = a + b + c;
-    document.getElementById("triangleResult").textContent =
-      `Area = ${area.toFixed(2)}, Perimeter = ${perimeter.toFixed(2)}`;
-  } else {
-    alert("Enter valid numbers for triangle!");
-  }
+  const area = 0.5 * base * height;
+  document.getElementById("triangleResult").textContent = area.toFixed(2);
 }
 
-// Pyramid (square base): volume = (1/3) * base^2 * height
-function calcPyramid() {
-  const base = parseFloat(document.getElementById("pyramidBase").value);
+// Pyramid Volume
+function pyramidVolume() {
+  const baseLength = parseFloat(document.getElementById("pyramidBase").value);
+  const baseWidth = parseFloat(document.getElementById("pyramidWidth").value);
   const height = parseFloat(document.getElementById("pyramidHeight").value);
-
-  if (!isNaN(base) && !isNaN(height) && base > 0 && height > 0) {
-    const volume = (1 / 3) * base * base * height;
-    document.getElementById("pyramidResult").textContent =
-      `Volume = ${volume.toFixed(2)}`;
-  } else {
-    alert("Enter valid base and height!");
-  }
+  const volume = (1 / 3) * baseLength * baseWidth * height;
+  document.getElementById("pyramidResult").textContent = volume.toFixed(2);
 }
