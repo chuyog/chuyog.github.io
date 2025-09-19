@@ -37,7 +37,7 @@
   <h2>Counter with Step</h2>
   <label>Step:</label>
   <input type="text" id="stepValue" value="2">
-  <p>Result: <span id="stepResult">0</span></p>
+  <p>Result: <span id="countByResult">0</span></p>
   <button onclick="countUpBy()">Up By Step</button>
   <button onclick="countDownBy()">Down By Step</button>
   <hr>
@@ -61,9 +61,10 @@
   <input type="text" id="mathInput"><br>
   <p>Result: <span id="mathResult"></span></p>
   <button onclick="showPi()">Pi</button>
-  <button onclick="showSine()">Sine</button>
+  <!-- Optional extra math functions -->
+  <!-- <button onclick="showSine()">Sine</button>
   <button onclick="showSquareRoot()">Square Root</button>
-  <button onclick="showRandom()">Random</button>
+  <button onclick="showRandom()">Random</button> -->
   <hr>
 
   <!-- Shapes Section -->
@@ -74,14 +75,14 @@
   <label>Radius:</label>
   <input type="text" id="circleRadius">
   <p>Result: <span id="circleResult"></span></p>
-  <button onclick="calcCircle()">Calculate</button>
+  <button onclick="circleArea()">Calculate</button>
 
   <!-- Sphere -->
   <h3>Sphere</h3>
   <label>Radius:</label>
   <input type="text" id="sphereRadius">
   <p>Result: <span id="sphereResult"></span></p>
-  <button onclick="calcSphere()">Calculate</button>
+  <button onclick="sphereVolume()">Calculate</button>
 
   <!-- Triangle -->
   <h3>Triangle</h3>
@@ -89,14 +90,8 @@
   <input type="text" id="triangleBase"><br>
   <label>Height:</label>
   <input type="text" id="triangleHeight"><br>
-  <label>Side A:</label>
-  <input type="text" id="triangleA"><br>
-  <label>Side B:</label>
-  <input type="text" id="triangleB"><br>
-  <label>Side C:</label>
-  <input type="text" id="triangleC"><br>
   <p>Result: <span id="triangleResult"></span></p>
-  <button onclick="calcTriangle()">Calculate</button>
+  <button onclick="triangleArea()">Calculate</button>
 
   <!-- Pyramid -->
   <h3>Pyramid (Square Base)</h3>
@@ -105,7 +100,7 @@
   <label>Height:</label>
   <input type="text" id="pyramidHeight"><br>
   <p>Result: <span id="pyramidResult"></span></p>
-  <button onclick="calcPyramid()">Calculate</button>
+  <button onclick="pyramidVolume()">Calculate</button>
 
   <!-- External JS -->
   <script src="calcscript.js"></script>
